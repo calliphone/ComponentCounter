@@ -321,6 +321,414 @@ var compsList = {
   },
 };
 
+var sumEvent = 0;
+
+var completedEvents = {
+  "Wandering soul": {
+        qty: 0,
+  },
+  "Sparkling glyph": {
+      qty: 0,
+  },
+  "Shambling horror": {
+    qty: 0,
+  },
+  "Corrupt glyphs": {
+    qty: 0,
+  },
+  "Soul storm": {
+    qty: 0,
+  },
+  "Defile": {
+    qty: 0,
+  },
+};
+
+var totalRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var WanderingRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var SparklingRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var ShamblingRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var CorruptRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var StormRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
+var DefileRewards = {
+  "Ectoplasm": {
+        qty: 0,
+  },
+  "Broken memento": {
+      qty: 0,
+  },
+  "Fragile memento": {
+    qty: 0,
+  },
+  "Spirit memento": {
+    qty: 0,
+  },
+  "Robust memento": {
+    qty: 0,
+  },
+  "Powerful memento": {
+    qty: 0,
+  },
+   "Lesser necroplasm": {
+        qty: 0,
+  },
+  "Greater necroplasm": {
+      qty: 0,
+  },
+  "Powerful necroplasm": {
+    qty: 0,
+  },
+  "Necromancer's tome of experience": {
+    qty: 0,
+  },
+  "Greater flaming skull": {
+    qty: 0,
+  },
+  "Greater ghostly ink": {
+    qty: 0,
+  },
+  "Powerful ghostly ink": {
+    qty: 0,
+  },
+  "Bones": {
+    qty: 0,
+  },
+  "Big bones": {
+    qty: 0,
+  },
+  "Baby dragon bones": {
+    qty: 0,
+  },
+  "Wyvern bones": {
+    qty: 0,
+  },
+   
+};
+
 if (localStorage.getItem("mats") != null) {
   tempList = JSON.parse(localStorage.mats);
   for (x in tempList) {
@@ -328,6 +736,17 @@ if (localStorage.getItem("mats") != null) {
       continue;
     } else {
       compsList[x].qty = tempList[x].qty;
+    }
+  }
+}
+
+if (localStorage.getItem("rewards") != null) {
+  tempList = JSON.parse(localStorage.rewards);
+  for (x in tempList) {
+    if (!tempList[x] || !totalRewards[x]) {
+      continue;
+    } else {
+      totalRewards[x].qty = tempList[x].qty;
     }
   }
 }
