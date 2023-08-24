@@ -729,7 +729,7 @@ var DefileRewards = {
    
 };
 
-if (localStorage.getItem("mats") != null) {
+/*if (localStorage.getItem("mats") != null) {
   tempList = JSON.parse(localStorage.mats);
   for (x in tempList) {
     if (!tempList[x] || !compsList[x]) {
@@ -739,7 +739,7 @@ if (localStorage.getItem("mats") != null) {
     }
   }
 }
-
+*/
 if (localStorage.getItem("rewards") != null) {
   tempList = JSON.parse(localStorage.rewards);
   for (x in tempList) {
