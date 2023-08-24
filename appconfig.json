@@ -1,6 +1,6 @@
 {
-    "appName": "ComponentCounter",
-    "description": "Tracks materials as they appear in the chat box.",
+    "appName": "Disturbance Drop Rate",
+    "description": "Tracks drops from necromancy disturbances.",
     "appUrl": "./index.html",
     "configUrl": "./appconfig.json",
     "iconUrl": "./images/icon.png",
