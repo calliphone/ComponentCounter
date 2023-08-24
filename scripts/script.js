@@ -58,7 +58,7 @@ window.setTimeout(function () {
     }
   }, 1000);
 
-  var count, mats, index;
+  var count, mats, index, reward;
   var actions = 0;
   var lastEvent = "None";
 
@@ -90,7 +90,7 @@ window.setTimeout(function () {
     }
   } */
   
-    function readChatbox() {
+/*      function readChatbox() {
     var opts1 = reader.read() || [];
     var chat1 = "";
 
@@ -99,8 +99,8 @@ window.setTimeout(function () {
     }
 
     var event1 = chat.match(
-      /You (successfully).|You (banish)*|You (expel)*|You (sever)*|You (dismiss)*|You (finish)* | You (complete)*/g
-	
+      /You (successfully)+|You (banish)+|You (expel)+|You (sever)+|You (dismiss)+|You (finish)* | You (complete)+ /g
+ 	
     );
     if (event1 != null && event1.length > -1);
     for (var x in event1) {
@@ -117,9 +117,10 @@ window.setTimeout(function () {
         continue;
       }
     }
-  }
+  } 
+ */
   
-    function readChatbox() {
+/*     function readChatbox() {
     var opts2 = reader.read() || [];
     var chat2 = "";
 
@@ -156,7 +157,38 @@ window.setTimeout(function () {
         continue;
       }
     }
+	} */
+	
+	function readChatbox() {
+    var opts = reader.read() || [];
+    var chat = "";
+
+    for (a in opts) {
+      chat += opts[a].text + " ";
+    }
+
+    var reward = chat.match(
+      /reward is added to the focus storage: (\d+ x \w.+)/g
+	 );
+    for (var x in reward) {
+      console.log(chat)
+	  count = Number(reward[x].match(/\d+/)); //1
+	  mats = reward[x].match(/[^The following reward is added to the ritual chest: \d x ]\w+( \w+)+( \w+)+( \w+)?/)[0];
+	  if (totalRewards[mats]) {
+        totalRewards[mats].qty += count; //add count to total rewards.
+		//add reward to individual disturbance rewards
+		tidyTable(totalRewards);
+	 };
+        
+     
+
+		else {
+        console.warn("Invalid reward. Ignoring.");
+        continue;
+      }
+    }
 	}
+	
   
 
  /*  function buildTable() {
@@ -224,7 +256,7 @@ window.setTimeout(function () {
   }
    */
   function tidyTable(flashRow) {
-    localStorage.rewards = JSON.stringify(totalRewards);
+    localStorage.mats = JSON.stringify(totalRewards);
     for (x in totalRewards) {
       $(`[data-name='${x}'] > .qty`).text(totalRewards[x].qty);
       if (totalRewards[x].qty === 0) {
@@ -233,7 +265,7 @@ window.setTimeout(function () {
         $(`[data-name='${x}']`).show();
       }
     }
-    $(`[data-name='${rewards}']`)
+    $(`[data-name='${mats}']`)
       .css({ "background-color": "lime" })
       .animate(
         {
