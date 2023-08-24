@@ -251,7 +251,7 @@ window.setTimeout(function () {
   buildTable();
   tidyTable();
 
-  $(".edit").change(function () {
+/*   $(".edit").change(function () {
     if ($(this).is(":checked")) {
       if ($(".tracker").text() == "Stop") {
         $(".tracker").click();
@@ -269,7 +269,7 @@ window.setTimeout(function () {
       }
       tidyTable();
     }
-  });
+  }); */
   
     $(".edit").change(function () {
     if ($(this).is(":checked")) {
@@ -320,7 +320,7 @@ window.setTimeout(function () {
     $(".options").toggle();
   });
 
-  $(".export").click(function () {
+/*   $(".export").click(function () {
     var str = "ComponentName,Quantity\n"; // column headers
     for (x in compsList) {
       str = str + x + "," + compsList[x].qty + "\n";
@@ -338,6 +338,32 @@ window.setTimeout(function () {
         var url = URL.createObjectURL(blob);
         link.setAttribute("href", url);
         link.setAttribute("download", "componentExport.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+  }); */
+  
+    $(".export").click(function () {
+    var str = "Disturbance Reward,Quantity\n"; // column headers
+    for (x in totalRewards) {
+      str = str + x + "," + totalRewards[x].qty + "\n";
+    }
+    //return str;
+    var blob = new Blob([str], { type: "text/csv;charset=utf-8;" });
+    if (navigator.msSaveBlob) {
+      // IE 10+
+      navigator.msSaveBlob(blob, "disturbanceExport.csv");
+    } else {
+      var link = document.createElement("a");
+      if (link.download !== undefined) {
+        // feature detection
+        // Browsers that support HTML5 download attribute
+        var url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "disturbanceExport.csv");
         link.style.visibility = "hidden";
         document.body.appendChild(link);
         link.click();
