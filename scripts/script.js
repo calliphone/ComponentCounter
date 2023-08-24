@@ -13,6 +13,7 @@ window.setTimeout(function () {
       A1lib.mixColor(255, 165, 0), //Scavenging comps
       A1lib.mixColor(255, 0, 0), //Rare Mats
       A1lib.mixColor(67, 188, 188), //Ancient components
+	  A1lib.mixColor(21, 7, 122), //Events and Rewards
     ],
     backwards: true,
   };
@@ -59,8 +60,9 @@ window.setTimeout(function () {
 
   var count, mats, index;
   var actions = 0;
+  var lastEvent = "None";
 
-  function readChatbox() {
+  /* function readChatbox() {
     var opts = reader.read() || [];
     var chat = "";
 
@@ -70,6 +72,7 @@ window.setTimeout(function () {
 
     var comps = chat.match(
       /\d+ x [\w-]+( \w+)?[^\d+:]|You receive \d+ [\w-]+( \w+)?[^\d+:]/g
+	
     );
     if (comps != null && comps.length > -1) actions++;
     for (var x in comps) {
@@ -85,9 +88,78 @@ window.setTimeout(function () {
         continue;
       }
     }
-  }
+  } */
+  
+    function readChatbox() {
+    var opts1 = reader.read() || [];
+    var chat1 = "";
 
-  function buildTable() {
+    for (a in opts1) {
+      chat1 += opts1[a].text + " ";
+    }
+
+    var event1 = chat.match(
+      /You (successfully).|You (banish)*|You (expel)*|You (sever)*|You (dismiss)*|You (finish)* | You (complete)*/g
+	
+    );
+    if (event1 != null && event1.length > -1);
+    for (var x in event1) {
+      console.log(chat)
+	  if (event1[x].match(/successfully/)) {lastEvent="Corrupt glyphs"; completedEvents[lastEvent].qty +=1}
+	  else if (event1[x].match(/banish/)) {lastEvent="Soul storm"; completedEvents[lastEvent].qty +=1}
+	  else if (event1[x].match(/expel/)) {lastEvent="Sparkling glyph"; completedEvents[lastEvent].qty +=1};
+	  else if (event1[x].match(/sever/)) {lastEvent="Shambling horror"; completedEvents[lastEvent].qty +=1};
+	  else if (event1[x].match(/dismiss/)) {lastEvent="Wandering soul"; completedEvents[lastEvent].qty +=1};
+	  else if (event1[x].match(/finish/)) {lastEvent="Defile"; completedEvents[lastEvent].qty +=1};
+	  else if (event1[x].match(/complete/)) {lastEvent="None"};
+ else {
+        console.warn("Invalid event.  Ignoring.");
+        continue;
+      }
+    }
+  }
+  
+    function readChatbox() {
+    var opts2 = reader.read() || [];
+    var chat2 = "";
+
+    for (a in opts2) {
+      chat2 += opts2[a].text + " ";
+    }
+
+    var reward = chat.match(
+      /reward is added to the focus storage: (\d+ x \w.+)/g
+	 );
+    for (var x in reward) {
+      console.log(chat)
+	  count = Number(reward[x].match(/\d+/)); //1
+	  rewards = reward[x].match(/[^The following reward is added to the ritual chest: \d x ]\w+( \w+)+( \w+)+( \w+)?/)[0];
+	  if (totalRewards[rewards]) {
+        totalRewards[rewards].qty += count; //add count to total rewards.
+		//add reward to individual disturbance rewards
+		if (lastEvent=="Wandering soul") {WanderingRewards[rewards].qty += count; sumEvent++
+		} else if (lastEvent=="Sparkling glyph") {SparklingRewards[rewards].qty += count; sumEvent++
+		} else if (lastEvent=="Shambling horror") {ShamblingRewards[rewards].qty += count; sumEvent++
+		} else if (lastEvent=="Corrupt glyphs") {CorruptRewards[rewards].qty += count; sumEvent++
+		} else if (lastEvent=="Soul storm") {StormRewards[rewards].qty += count; sumEvent++
+		} else if (lastEvent=="Defile") {DefileRewards[rewards].qty += count; sumEvent++
+		} else {console.warn("Can't associate reward with event. Ignoring.");
+        continue;
+		};
+		tidyTable(totalRewards);
+	 };
+        
+     
+
+		else {
+        console.warn("Invalid reward. Ignoring.");
+        continue;
+      }
+    }
+	}
+  
+
+ /*  function buildTable() {
     for (x in compsList) {
       if (compsList[x].type === "ancient") {
         $(".ancient").append(
@@ -114,9 +186,19 @@ window.setTimeout(function () {
         );
       }
     }
-  }
+  } */
+  
+  function buildTable() {
+    for (x in totalRewards) {
+          $(".common").append(
+          `<tr data-name="${x}"><td>${x.split(" ")[0]
+          }</td><td class='qty'></td></tr>`
+        );
+      }
+    }
+  
 
-  function tidyTable(flashRow) {
+/*   function tidyTable(flashRow) {
     localStorage.mats = JSON.stringify(compsList);
     for (x in compsList) {
       $(`[data-name='${x}'] > .qty`).text(compsList[x].qty);
@@ -127,6 +209,31 @@ window.setTimeout(function () {
       }
     }
     $(`[data-name='${mats}']`)
+      .css({ "background-color": "lime" })
+      .animate(
+        {
+          backgroundColor: $.Color("rgba(0, 0, 0, 0)"),
+        },
+        500,
+        function () {
+          $(this).removeAttr("style");
+        }
+      );
+
+    $(".actions").text(actions);
+  }
+   */
+  function tidyTable(flashRow) {
+    localStorage.rewards = JSON.stringify(totalRewards);
+    for (x in totalRewards) {
+      $(`[data-name='${x}'] > .qty`).text(totalRewards[x].qty);
+      if (totalRewards[x].qty === 0) {
+        $(`[data-name='${x}']`).hide();
+      } else {
+        $(`[data-name='${x}']`).show();
+      }
+    }
+    $(`[data-name='${rewards}']`)
       .css({ "background-color": "lime" })
       .animate(
         {
@@ -159,6 +266,26 @@ window.setTimeout(function () {
       $(".qty").removeAttr("contenteditable");
       for (x in compsList) {
         compsList[x].qty = parseInt($(`[data-name='${x}'] .qty`).text());
+      }
+      tidyTable();
+    }
+  });
+  
+    $(".edit").change(function () {
+    if ($(this).is(":checked")) {
+      if ($(".tracker").text() == "Stop") {
+        $(".tracker").click();
+      }
+      $("tr:hidden").show();
+      $(".qty")
+        .attr("contenteditable", "true")
+        .focus(function () {
+          document.execCommand("selectAll", false, null);
+        });
+    } else {
+      $(".qty").removeAttr("contenteditable");
+      for (x in totalRewards) {
+        totalRewards[x].qty = parseInt($(`[data-name='${x}'] .qty`).text());
       }
       tidyTable();
     }
